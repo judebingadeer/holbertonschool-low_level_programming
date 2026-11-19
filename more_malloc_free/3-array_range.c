@@ -18,9 +18,9 @@ int *array_range(int min, int max)
 	if (min > max)
 		return (NULL);
 
-	count = (size_t)((long long)max - (long long)min + 1);
+	count = (size_t)((unsigned int)max - (unsigned int)min) + 1;
 
-	if (count > SIZE_MAX / sizeof(int))
+	if (count == 0 || count > SIZE_MAX / sizeof(int))
 		return (NULL);
 
 	array = malloc(count * sizeof(int));
@@ -28,7 +28,7 @@ int *array_range(int min, int max)
 		return (NULL);
 
 	for (i = 0; i < count; i++)
-		array[i] = (int)((long long)min + (long long)i);
+		array[i] = (int)((unsigned int)min + (unsigned int)i);
 
 	return (array);
 }
